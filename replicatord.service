@@ -1,0 +1,16 @@
+[Unit]
+Description=MySQL/MariaDB to Tarantool replication daemon
+After=network.target mariadb.service mysql.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/MariaDBReplica/
+ExecStart=/opt/MariaDBReplica/replica.py
+Restart=always
+RestartSec=20
+StandardOutput=syslog
+User=replica
+Group=replica
+
+[Install]
+WantedBy=multi-user.target

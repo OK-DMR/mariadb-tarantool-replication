@@ -1,0 +1,4 @@
+setuptools
+pymysql
+pyyaml
+tarantool

@@ -1,0 +1,29 @@
+mysql:
+    host: localhost
+    port: 3306
+    user: root
+    password: toor
+    replication_slave_id: 1337
+
+tarantool:
+    host: localhost
+    port: 3301
+    user: root
+    password: toor
+
+mappings:
+    - database: test
+      table: User
+      columns: [ id, name, email, active ]
+      # target tarantool space has 4 columns, from MySQL, columns named 'id', 'name', 'email' and 'active' are mapped
+      space: UserCache
+      # for delete / update queries, index with fields `[ 2 ]` (email) is expected as unique primary index
+      key_fields: [ 2 ]
+
+    - database: test
+      table: Pages
+      columns: [ id, title, text ]
+      # target tarantool space has 3 columns, from MySQL, columns named 'id', 'title' and 'text' are mapped
+      space: PageCache
+      # for delete / update queries, index with field `[ 0 ]` (id) is expected as unique primary index
+      key_fields: [ 0 ]
